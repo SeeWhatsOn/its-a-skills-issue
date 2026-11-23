@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+  Explainer template for GitHub issue artifacts.
+  Self-contained on purpose: no CDNs, remote fonts or JavaScript, because the
+  GitHub preview is sandboxed. Replace every {{PLACEHOLDER}} and delete
+  sections you don't need. Keep it to one screen-ish of content.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --line: #d1d9e0;
+    --card: #f6f8fa; --a: #0969da; --a-soft: #ddf4ff; --b: #8250df; --b-soft: #fbefff;
+    --ok: #1a7f37; --warn: #9a6700; --warn-soft: #fff8c5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --line: #3d444d;
+      --card: #151b23; --a: #4493f8; --a-soft: #0c2d6b; --b: #ab7df8; --b-soft: #2e1a4f;
+      --ok: #3fb950; --warn: #d29922; --warn-soft: #3a2a00;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: 32px 20px 48px; }
+  h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px; }
+  h2 { font-size: 18px; margin: 36px 0 12px; }
+  .lede { color: var(--muted); font-size: 18px; margin: 0; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .06em; font-size: 12px; font-weight: 600; color: var(--muted); }
+
+  /* Key numbers */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 24px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .stat b { display: block; font-size: 26px; line-height: 1.1; }
+  .stat span { color: var(--muted); font-size: 14px; }
+
+  /* Side-by-side options */
+  .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .option { border: 1px solid var(--line); border-top: 4px solid var(--a); border-radius: 10px; padding: 16px 18px; }
+  .option.b { border-top-color: var(--b); }
+  .option h3 { margin: 0 0 4px; font-size: 17px; }
+  .option .who { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
+  .option ul { margin: 0; padding-left: 18px; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+    background: var(--a-soft); color: var(--a); }
+  .option.b .tag { background: var(--b-soft); color: var(--b); }
+
+  /* Proportional bar, e.g. minutes in a meeting */
+  .bar { display: flex; height: 34px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+  .bar div { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;
+    color: #fff; white-space: nowrap; overflow: hidden; padding: 0 4px; }
+  .legend { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+  /* Timeline */
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+  .timeline li { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: var(--card); }
+  .timeline li.a { border-left: 4px solid var(--a); }
+  .timeline li.b { border-left: 4px solid var(--b); }
+  .timeline li.end { border-left: 4px solid var(--ok); }
+  .timeline small { color: var(--muted); display: block; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; }
+
+  .callout { border-left: 4px solid var(--warn); background: var(--warn-soft); border-radius: 6px; padding: 12px 16px; }
+  .callout ol, .callout ul { margin: 6px 0 0; padding-left: 20px; }
+  footer { margin-top: 40px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- 1. Header: what this is, in one line -->
+  <p class="eyebrow">{{REPO}} · Issue #{{NUMBER}}</p>
+  <h1>{{TITLE}}</h1>
+  <p class="lede">{{ONE_SENTENCE_SUMMARY}}</p>
+
+  <!-- 2. Key numbers (optional). Only real figures from the issue. -->
+  <div class="stats">
+    <div class="stat"><b>{{N1}}</b><span>{{LABEL1}}</span></div>
+    <div class="stat"><b>{{N2}}</b><span>{{LABEL2}}</span></div>
+    <div class="stat"><b>{{N3}}</b><span>{{LABEL3}}</span></div>
+  </div>
+
+  <!-- 3. Side-by-side options (optional) -->
+  <h2>{{COMPARE_HEADING}}</h2>
+  <div class="compare">
+    <section class="option">
+      <span class="tag">{{OPTION_A_TAG}}</span>
+      <h3>{{OPTION_A}}</h3>
+      <p class="who">{{OPTION_A_AUDIENCE}}</p>
+      <ul><li>{{POINT}}</li><li>{{POINT}}</li></ul>
+    </section>
+    <section class="option b">
+      <span class="tag">{{OPTION_B_TAG}}</span>
+      <h3>{{OPTION_B}}</h3>
+      <p class="who">{{OPTION_B_AUDIENCE}}</p>
+      <ul><li>{{POINT}}</li><li>{{POINT}}</li></ul>
+    </section>
+  </div>
+
+  <!-- 4. Proportional bar (optional): set flex to each part's share, e.g. minutes -->
+  <h2>{{BAR_HEADING}}</h2>
+  <div class="bar" role="img" aria-label="{{BAR_ALT_TEXT}}">
+    <div style="flex:12;background:var(--a)">{{PART}} 12</div>
+    <div style="flex:7;background:var(--b)">{{PART}} 7</div>
+    <div style="flex:5;background:var(--ok)">{{PART}} 5</div>
+  </div>
+  <p class="legend">{{BAR_LEGEND}}</p>
+
+  <!-- 5. Timeline (optional) -->
+  <h2>{{TIMELINE_HEADING}}</h2>
+  <ol class="timeline">
+    <li class="a"><small>Step 1</small>{{STEP}}</li>
+    <li class="b"><small>Step 2</small>{{STEP}}</li>
+    <li class="end"><small>Then</small>{{OUTCOME}}</li>
+  </ol>
+
+  <!-- 6. Detail table (optional) -->
+  <h2>{{TABLE_HEADING}}</h2>
+  <table>
+    <thead><tr><th></th><th>{{COL_A}}</th><th>{{COL_B}}</th></tr></thead>
+    <tbody>
+      <tr><th>{{ROW}}</th><td>{{CELL}}</td><td>{{CELL}}</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 7. Open questions: mirror the ones in the issue body -->
+  <h2>Open questions</h2>
+  <div class="callout">
+    <strong>Reply on the issue</strong>
+    <ol><li>{{QUESTION}}</li></ol>
+  </div>
+
+  <footer>Companion to issue #{{NUMBER}}. The issue is the source of truth; this page is a visual summary.</footer>
+</main>
+</body>
+</html>

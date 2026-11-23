@@ -1,0 +1,13 @@
+{
+  "name": "its-a-skills-issue",
+  "description": "Agent skills that work in Claude Code, Cursor and other agents. Starts with github-issues: short, scannable GitHub issues with callouts, the right diagrams and HTML issue artifacts.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Chris Watson"
+  },
+  "keywords": [
+    "skills",
+    "github",
+    "issues"
+  ]
+}
